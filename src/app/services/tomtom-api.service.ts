@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Address} from './models/Address';
+import {Address} from '../models/Address';
 import {map, tap} from 'rxjs/operators';
 
 @Injectable({

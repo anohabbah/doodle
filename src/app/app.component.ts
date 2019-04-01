@@ -1,10 +1,10 @@
-import {AfterContentInit, Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from './models/user';
 import {Meeting} from './models/meeting';
 import {SelectItem} from 'primeng/api';
-import {TomtomApiService} from './tomtom-api.service';
+import {TomtomApiService} from './services/tomtom-api.service';
 import {Address} from './models/Address';
-import _ from 'lodash';
+import {DoodleApiService} from './services/doodle-api.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ import _ from 'lodash';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit, AfterContentInit {
+export class AppComponent {
   user: User = {lastName: '', firstName: '', email: ''};
   meeting: Meeting = {title: '', summary: ''};
   optionItems: SelectItem[] = [
@@ -21,17 +21,11 @@ export class AppComponent implements OnInit, AfterContentInit {
     {label: 'Date & Location Survey', value: 2, icon: 'fa fa-fw fa-calendar'}
   ];
   surveyType = 0;
-  dates: string;
-  locations: string;
+  dates: string[];
+  locations: string[];
   suggestions: string[];
 
-  constructor(private mapsService: TomtomApiService) {
-  }
-
-  ngAfterContentInit(): void {
-  }
-
-  ngOnInit(): void {
+  constructor(private mapsService: TomtomApiService, private doodleApi: DoodleApiService) {
   }
 
   search(event) {
@@ -46,5 +40,21 @@ export class AppComponent implements OnInit, AfterContentInit {
           this.suggestions.push(`${address.freeformAddress}, ${address.country}`);
         });
       });
+  }
+
+  onSubmit() {
+    const payload = {
+      user: this.user,
+      meeting: this.meeting,
+      surveyType: this.surveyType,
+      dates: this.dates,
+      locations: this.locations
+    };
+    console.log(payload);
+
+    this.doodleApi.store(payload)
+      .subscribe(
+        res => console.log(res)
+      );
   }
 }
