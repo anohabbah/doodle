@@ -6,16 +6,22 @@ import {PrimeNGModule} from './prime-ng.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import { ProfileComponent } from './profile/profile.component';
+import { DoodleComponent } from './doodle/doodle.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfileComponent,
+    DoodleComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     PrimeNGModule,
     HttpClientModule,
+    AppRoutingModule,
     BrowserAnimationsModule
   ],
   providers: [],

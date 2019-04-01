@@ -12,6 +12,6 @@ export class DoodleApiService {
   constructor(private http: HttpClient) {}
 
   store(payload: {user: User, meeting: Meeting, surveyType: number, dates?: string[], locations?: string[]}) {
-    return this.http.post(this.baseURL + '/api/doodle', payload, {headers: {'Content-Type': 'application/json'}});
+    return this.http.post('/api/doodle', payload, {headers: {'Content-Type': 'application/json'}});
   }
 }
