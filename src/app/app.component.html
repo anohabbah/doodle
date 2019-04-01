@@ -1,0 +1,112 @@
+<nav class="site-header sticky-top py-1 mb-4">
+  <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <a class="py-2" href="#">
+      <!--<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>-->
+      Doodle
+    </a>
+    <!--<a class="py-2 d-none d-md-inline-block" href="#">Tour</a>-->
+    <!--<a class="py-2 d-none d-md-inline-block" href="#">Product</a>-->
+    <!--<a class="py-2 d-none d-md-inline-block" href="#">Features</a>-->
+    <!--<a class="py-2 d-none d-md-inline-block" href="#">Enterprise</a>-->
+  </div>
+</nav>
+
+<main class="container" style="margin-bottom: 100px">
+  <h2>Create a Doodle</h2>
+
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <p-panel header="Your Information">
+        <div class="ui-g ui-fluid mt-3">
+          <div class="ui-g-12 ui-md-6">
+          <span class="ui-float-label">
+            <input id="lastName" type="text" pInputText [(ngModel)]="user.lastName">
+            <label for="lastName">Enter Your Last Name</label>
+          </span>
+          </div>
+          <div class="ui-g-12 ui-md-6">
+          <span class="ui-float-label">
+            <input id="firstName" type="text" pInputText [(ngModel)]="user.firstName">
+            <label for="firstName">Enter Your First Name</label>
+          </span>
+          </div>
+        </div>
+        <div class="ui-g ui-fluid mt-3">
+          <div class="ui-g-12">
+          <span class="ui-float-label">
+            <input id="email" type="text" pInputText [(ngModel)]="user.email">
+            <label for="email">Enter Your Email</label>
+          </span>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="ui-g-12">
+      <p-panel header="Doodle Information">
+        <div class="ui-g ui-fluid mt-3">
+          <div class="ui-g-12 ui-md-6">
+            <span class="ui-float-label">
+              <input id="title" type="text" pInputText [(ngModel)]="meeting.title">
+              <label for="title">Enter the Meeting Title</label>
+            </span>
+          </div>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12">
+            <h6>Do you planning a break during the meeting ?</h6>
+            <p-inputSwitch [(ngModel)]="meeting.pause"></p-inputSwitch>
+          </div>
+          <div class="ui-g-12">
+            <label for="summary">Meeting Summary</label>
+            <textarea
+              id="summary" rows="5"
+              placeholder="Give a short summary about the meeting..."
+              pInputTextarea autoResize="autoResize" [(ngModel)]="meeting.summary"></textarea>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div class="ui-g-12">
+      <p-panel header="Survey Information">
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-9">
+            <h6>Tell us the kind of survey you want ?</h6>
+            <p-selectButton [options]="optionItems" [(ngModel)]="surveyType"></p-selectButton>
+          </div>
+        </div>
+
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12" *ngIf="surveyType === 0 || surveyType === 2">
+            <h6>Select dates and times to propose for the survey. <small>You can select multiple dates at once</small></h6>
+            <p-calendar
+              placeholder="Click to pick up times"
+              [(ngModel)]="dates"
+              [readonlyInput]="true"
+              [showTime]="true"
+              [showIcon]="true"
+              selectionMode="multiple"></p-calendar>
+          </div>
+
+          <div class="ui-g-12" *ngIf="surveyType === 1 || surveyType === 2">
+            <h6>Locations</h6>
+            <p-autoComplete
+              placeholder="Enter addresses"
+              id="locations"
+              [(ngModel)]="locations"
+              [multiple]="true"
+              [suggestions]="suggestions"
+              (completeMethod)="search($event)"></p-autoComplete>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+</main>
+
+<footer class="fixed-bottom mt-auto py-3 bg-white shadow-lg">
+  <div class="container">
+    <button pButton type="button" label="Let's Create" class="ui-button-raised float-right"></button>
+  </div>
+</footer>
