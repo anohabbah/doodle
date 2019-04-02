@@ -4,7 +4,9 @@
 
 <div class="ui-g ui-fluid" *ngIf="user$ | async as user">
   <div class="ui-g-8">
-    <p-panel *ngFor="let meeting of user.meetings" [header]="meeting.title" [toggleable]="true">
+    <p-panel
+      *ngFor="let meeting of user.meetings"
+      [header]="meeting.title" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
       {{ meeting.summary }}
     </p-panel>
   </div>
