@@ -4,7 +4,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {DoodleComponent} from './doodle/doodle.component';
 
 const routes: Routes = [
-  {path: 'profile', component: ProfileComponent},
+  {path: 'profile/:email', component: ProfileComponent},
   {path: '', component: DoodleComponent},
 ];
 

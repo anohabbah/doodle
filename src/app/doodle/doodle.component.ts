@@ -5,6 +5,7 @@ import {SelectItem} from 'primeng/api';
 import {TomtomApiService} from '../services/tomtom-api.service';
 import {DoodleApiService} from '../services/doodle-api.service';
 import {Address} from '../models/Address';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-doodle',
@@ -18,14 +19,15 @@ export class DoodleComponent {
   optionItems: SelectItem[] = [
     {label: 'Date Survey', value: 0, icon: 'fa fa-fw fa-clock-o'},
     {label: 'Location Survey', value: 1, icon: 'fa fa-fw fa-map-marker'},
-    {label: 'Date & Location Survey', value: 2, icon: 'fa fa-fw fa-calendar'}
+    {label: 'Date & Location Survey', value: 2, icon: 'fa fa-fw fa-calendar'},
+    {label: 'Meal Survey', value: 2, icon: 'fa fa-fw fa-cutlery'}
   ];
   surveyType = 0;
   dates: string[];
   locations: string[];
   suggestions: string[];
 
-  constructor(private mapsService: TomtomApiService, private doodleApi: DoodleApiService) {
+  constructor(private mapsService: TomtomApiService, private doodleApi: DoodleApiService, private router: Router) {
   }
 
   search(event) {
@@ -50,11 +52,10 @@ export class DoodleComponent {
       dates: this.dates,
       locations: this.locations
     };
-    console.log(payload);
 
     this.doodleApi.store(payload)
       .subscribe(
-        res => console.log(res)
+        (res: User) => {this.router.navigate(['/profile', res.email]); }
       );
   }
 }

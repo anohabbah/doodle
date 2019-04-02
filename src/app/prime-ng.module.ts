@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CardModule} from 'primeng/card';
 import {
-  AutoCompleteModule,
+  AutoCompleteModule, BreadcrumbModule,
   ButtonModule,
   CalendarModule,
   InputSwitchModule,
@@ -20,6 +20,7 @@ import {
     MessageModule,
     CalendarModule,
     InputTextModule,
+    BreadcrumbModule,
     InputSwitchModule,
     SelectButtonModule,
     AutoCompleteModule,
