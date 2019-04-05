@@ -1,0 +1,54 @@
+<p-progressBar *ngIf="!(meeting$ | async)" mode="indeterminate" [style]="{'height': '2px'}"></p-progressBar>
+
+<div class="py-3">
+  <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+</div>
+
+<h4>Associated Surveys</h4>
+
+<div class="ui-g ui-fluid" *ngIf="meeting$ | async as meeting">
+  <div class="ui-g-8">
+    <p-panel *ngFor="let survey of meeting.surveys"
+             [header]="setTitle(survey)"
+             [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+      <div class="surveys dates" *ngIf="survey.dates">
+        <h6>Dates</h6>
+        <div *ngFor="let date of survey.dates" class="survey-item">
+          <div class="label">
+            {{ date.time | dateFormat }}
+          </div>
+          <div class="survey-inner">
+            <p-progressBar [value]="setValueBaseOnDates(survey, date)"></p-progressBar>
+          </div>
+        </div>
+      </div>
+
+      <div class="surveys addresses" *ngIf="survey.addresses">
+        <h6>Locations</h6>
+        <div class="survey-item" *ngFor="let address of survey.addresses">
+          <div class="label" style="text-align: center">{{ address.location }}</div>
+          <div class="survey-inner">
+            <p-progressBar [value]="setValueBaseOnAddresses(survey, address)"></p-progressBar>
+          </div>
+        </div>
+      </div>
+
+      <div class="surveys meals" *ngIf="survey.dietaries">
+        <h6>Meals</h6>
+        <div class="survey-item" *ngFor="let meal of survey.dietaries">
+          <div class="label" style="text-align: center">{{ meal.name }}</div>
+          <div class="survey-inner">
+            <p-progressBar [value]="setValueBaseOnMeals(survey, meal)"></p-progressBar>
+          </div>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="ui-g-4">
+    <p-card
+      [header]="meeting.title" styleClass="ui-card-shadow">
+      {{ meeting.summary }}
+    </p-card>
+  </div>
+</div>

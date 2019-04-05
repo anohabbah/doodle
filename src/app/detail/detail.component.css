@@ -1,0 +1,21 @@
+.survey-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-bottom: .5rem;
+}
+
+.survey-item .label {
+  flex: 1 1 40%;
+  font-size: 12px;
+  font-weight: lighter;
+  text-align: right;
+  margin-right: 15px;
+}
+.survey-item .survey-inner {
+  flex: 1 1 60%;
+}
+
+.surveys {
+  margin-bottom: 1.5rem;
+}

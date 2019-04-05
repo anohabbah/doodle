@@ -20,7 +20,7 @@ export class DoodleComponent {
     {label: 'Date Survey', value: 0, icon: 'fa fa-fw fa-clock-o'},
     {label: 'Location Survey', value: 1, icon: 'fa fa-fw fa-map-marker'},
     {label: 'Date & Location Survey', value: 2, icon: 'fa fa-fw fa-calendar'},
-    {label: 'Meal Survey', value: 2, icon: 'fa fa-fw fa-cutlery'}
+    {label: 'Meal Survey', value: 3, icon: 'fa fa-fw fa-cutlery'}
   ];
   surveyType = 0;
   dates: string[];

@@ -9,12 +9,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { DoodleComponent } from './doodle/doodle.component';
+import { DetailComponent } from './detail/detail.component';
+import { DateFormatPipe } from './date-format.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
-    DoodleComponent
+    DoodleComponent,
+    DetailComponent,
+    DateFormatPipe
   ],
   imports: [
     BrowserModule,

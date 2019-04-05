@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {User} from '../models/user';
 import {DoodleApiService} from '../services/doodle-api.service';
 import {MenuItem} from 'primeng/api';
+import {Meeting} from '../models/meeting';
 
 @Component({
   selector: 'app-profile',
@@ -28,4 +29,7 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  rawTitle(meeting: Meeting) {
+    return '<a [routerLink]="[\'/meetings/\']" >' + meeting.title + '</a>';
+  }
 }

@@ -101,7 +101,7 @@
       <button
         pButton
         type="submit"
-        [disabled]="!doodleForm.form.valid"
+        [disabled]="!doodleForm.form.valid && (!locations || !dates)"
         label="Let's Create" class="ui-button-raised float-right"></button>
     </div>
   </div>

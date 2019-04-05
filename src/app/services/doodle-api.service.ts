@@ -18,4 +18,8 @@ export class DoodleApiService {
   getUserInfo(email: string): Observable<User> {
     return this.http.get<User>(`/api/users/${email}`);
   }
+
+  getMeeting(id: string): Observable<Meeting> {
+    return this.http.get<Meeting>('/api/meetings/' + id);
+  }
 }
