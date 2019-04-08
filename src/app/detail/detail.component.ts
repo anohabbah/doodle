@@ -6,6 +6,9 @@ import {switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Meeting} from '../models/meeting';
 import {Survey} from '../models/survey';
+import {User} from '../models/user';
+
+import md5 from 'md5';
 
 @Component({
   selector: 'app-detail',
@@ -18,6 +21,8 @@ export class DetailComponent implements OnInit {
     {label: 'Meeting Details'}
   ];
   home: MenuItem = {url: '/', icon: 'pi pi-home'};
+  usersToInvite: string[];
+  suggestions: string[];
 
   constructor(private router: Router, private route: ActivatedRoute, private service: DoodleApiService) {}
 
@@ -54,5 +59,33 @@ export class DetailComponent implements OnInit {
 
   setValueBaseOnMeals(survey: Survey, meal: { voters: any[] }): number {
     return this.setValue(survey, meal, 'dietaries');
+  }
+
+  autocompleteRequest(event: { query }) {
+    this.service.autocomplete(event.query)
+      .subscribe(
+        (res: User[]) => {
+          this.suggestions = res.map((item: User) => item.email);
+        }
+      );
+  }
+
+  sendInvitations(meeting: Meeting) {
+    if (this.usersToInvite) {
+      this.service.sendInvitations(meeting, this.usersToInvite)
+        .subscribe(
+          (res) => {
+            console.log('res', res);
+          }
+        );
+    }
+  }
+
+  setSubHeader(pause: false) {
+    return pause ? 'You plan a break for this meeting' : 'You do not plan a break for this meeting';
+  }
+
+  gravatarUrl(value: string): string {
+    return '//www.gravatar.com/avatar/' + md5(value) + '?s=20&d=//s3.amazonaws.com/laracasts/images/default-square-avatar.jpg';
   }
 }

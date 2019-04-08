@@ -10,7 +10,7 @@
       *ngFor="let meeting of user.meetings"
       [toggleable]="true" [style]="{'margin-bottom':'20px'}">
       <p-header>
-        <a [routerLink]="['/meetings/' + meeting.id]">{{ meeting.title }}</a>
+        <a class="ui-panel-title" [routerLink]="['/meetings/' + meeting.id]">{{ meeting.title }}</a>
       </p-header>
       {{ meeting.summary }}
     </p-panel>

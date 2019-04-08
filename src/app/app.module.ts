@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DoodleComponent } from './doodle/doodle.component';
 import { DetailComponent } from './detail/detail.component';
 import { DateFormatPipe } from './date-format.pipe';
+import { VoteComponent } from './vote/vote.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DateFormatPipe } from './date-format.pipe';
     ProfileComponent,
     DoodleComponent,
     DetailComponent,
-    DateFormatPipe
+    DateFormatPipe,
+    VoteComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
 <h4>Associated Surveys</h4>
 
 <div class="ui-g ui-fluid" *ngIf="meeting$ | async as meeting">
-  <div class="ui-g-8">
+  <div class="ui-g-8 pl-0">
     <p-panel *ngFor="let survey of meeting.surveys"
              [header]="setTitle(survey)"
              [toggleable]="true" [style]="{'margin-bottom':'20px'}">
@@ -42,13 +42,41 @@
           </div>
         </div>
       </div>
+
+      <p-footer *ngIf="meeting.participants && meeting.participants.length">
+        <div class="d-flex p-justify-between p-align-center">
+          <h6 class="mb-0">Invited Users:</h6>
+          <div class="d-flex p-justify-end">
+            <img *ngFor="let p of meeting.participants" class="rounded-circle ml-1" width="20" height="20"
+                 [src]="gravatarUrl(p.email)"
+                 [title]="p.firstName + ' ' + p.lastName"
+                 [alt]="p.firstName + ' ' + p.lastName">
+          </div>
+        </div>
+      </p-footer>
     </p-panel>
   </div>
 
-  <div class="ui-g-4">
+  <div class="ui-g-4 pr-0">
     <p-card
-      [header]="meeting.title" styleClass="ui-card-shadow">
+      [header]="meeting.title" [subheader]="setSubHeader(meeting.pause)"
+      styleClass="ui-card-shadow">
       {{ meeting.summary }}
+    </p-card>
+
+    <p-card header="Invite Friends" [styleClass]="'mt-3'">
+      <div class="ui-fluid">
+        <p-autoComplete
+          [(ngModel)]="usersToInvite"
+          [suggestions]="suggestions"
+          (completeMethod)="autocompleteRequest($event)"
+          styleClass="wid100 mb-3"
+          [minLength]="1" placeholder="Enter friends mail here..." [multiple]="true">
+        </p-autoComplete>
+        <button
+          [disabled]="!usersToInvite || !usersToInvite.length"
+          pButton type="button" label="Invite" class="ui-button-raised" (click)="sendInvitations(meeting)"></button>
+      </div>
     </p-card>
   </div>
 </div>

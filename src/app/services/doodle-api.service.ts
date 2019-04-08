@@ -9,7 +9,8 @@ import {Observable} from 'rxjs';
 })
 export class DoodleApiService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   store(payload: { user: User, meeting: Meeting, surveyType: number, dates?: string[], locations?: string[] }) {
     return this.http.post('/api/doodle', payload, {headers: {'Content-Type': 'application/json'}});
@@ -21,5 +22,17 @@ export class DoodleApiService {
 
   getMeeting(id: string): Observable<Meeting> {
     return this.http.get<Meeting>('/api/meetings/' + id);
+  }
+
+  autocomplete(value: string) {
+    return this.http.post(`/api/users/${value}`, null);
+  }
+
+  sendInvitations(meeting: Meeting, payload: any[]): Observable<Meeting> {
+    return this.http.post<Meeting>(
+      `/api/meetings/${meeting.id}/invitations`,
+      payload,
+      {headers: {'Content-Type': 'application/json'}}
+      );
   }
 }
