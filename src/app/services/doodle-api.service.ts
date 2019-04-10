@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../models/user';
 import {Meeting} from '../models/meeting';
 import {Observable} from 'rxjs';
+import {Survey} from '../models/survey';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,9 @@ export class DoodleApiService {
       payload,
       {headers: {'Content-Type': 'application/json'}}
       );
+  }
+
+  vote(survey: Survey, payload: object) {
+    return this.http.post(`/api/surveys/${survey.id}/votes`, payload);
   }
 }

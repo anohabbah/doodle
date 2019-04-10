@@ -72,12 +72,7 @@ export class DetailComponent implements OnInit {
 
   sendInvitations(meeting: Meeting) {
     if (this.usersToInvite) {
-      this.service.sendInvitations(meeting, this.usersToInvite)
-        .subscribe(
-          (res) => {
-            console.log('res', res);
-          }
-        );
+      this.meeting$ = this.service.sendInvitations(meeting, this.usersToInvite);
     }
   }
 
